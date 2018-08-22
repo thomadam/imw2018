@@ -87,8 +87,30 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFyZW5hYiIsImEiOiJjajV2ajVyZXUwMnN3MzNwNzR3Y
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/marenab/cjl2oczit56x42rlxm5adlopg', // stylesheet location
-    center: [-139, 64], // starting position [lng, lat]
-    zoom: 9 // starting zoom
+
+});
+
+map.on('load', function() {
+  // the rest of the code will go in here
+var layers = ['1730-10000', '10000-50000', '50000-100000', '100000-150000', '150000+'];
+var colors = ['#FFEDA0', '#cfecd9', '#a0dab3', '#40b7c4', '#3195a0', '#253393'];
+
+for (i = 0; i < layers.length; i++) {
+  var layer = layers[i];
+  var color = colors[i];
+  var item = document.createElement('div');
+  var key = document.createElement('span');
+  key.className = 'legend-key';
+  key.style.backgroundColor = color;
+
+  var value = document.createElement('span');
+  value.innerHTML = layer;
+  item.appendChild(key);
+  item.appendChild(value);
+  legend.appendChild(item);
+}
+
+
 });
 
 // Add zoom and rotation controls to the map.
