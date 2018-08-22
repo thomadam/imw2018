@@ -113,6 +113,18 @@ for (i = 0; i < layers.length; i++) {
 
 });
 
+map.on('mousemove', function(e) {
+  var provinces = map.queryRenderedFeatures(e.point, {
+    layers: ['canada-pop']
+  });
+
+  if (provinces.length > 0) {
+    document.getElementById('pd').innerHTML = '<h3><strong>' + provinces[0].properties.NAME + '</strong></h3><p><strong><em>' + provinces[0].properties.aboriginal_pop + '</strong>Aboriginal population</em></p>';
+  } else {
+    document.getElementById('pd').innerHTML = '<p>Hover over a province!</p>';
+  }
+});
+
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
